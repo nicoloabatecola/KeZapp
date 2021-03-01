@@ -17,7 +17,7 @@ export class AppComponent {
   constructor(private http: HttpClient) { }
 
   registrazione() {
-    let oss = this.http.post<RegistrazioneDto>("", this.req);
+    let oss = this.http.post<RegistrazioneDto>("/registrazione", this.req);
     oss.subscribe(r => {
       this.reg = r;
       this.req.nickname = "";
