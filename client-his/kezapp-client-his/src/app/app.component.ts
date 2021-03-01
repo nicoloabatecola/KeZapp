@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  registrazione() {
-
-  }
+  registrazione() {}
+  inviaTutti(){}
+  invia(){}
+  aggiorna(){}
 }
