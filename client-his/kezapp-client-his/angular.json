@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "kezapp-client-his"
+  "defaultProject": "kezapp-client-his",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,7 +1,10 @@
-<input type="text">
+<div *ngIf="sessione == null">
+<input type="text" >
 <button (click)="registrazione()">Registrati</button>
+</div>
 <br>
 <br>
+<div *ngIf="sessione != null">
 <input type="text">
 <button (click)="inviaTutti()">Invia a tutti</button>
 <br>
@@ -39,3 +42,4 @@
     <td></td>
   </tr>
 </table>
+</div>
