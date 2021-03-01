@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,9 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  sessione = "";
+  sessione: string;
 
-  registrazione() {}
+  constructor(private http: HttpClient){}
+
+  registrazione() {
+    
+  }
   inviaTutti(){}
   invia(){}
   aggiorna(){}
