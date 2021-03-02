@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Chat } from './chat';
 import { RegistrazioneDto } from './registrazione-dto';
 import { RichiediRegistrazioneDto } from './richiedi-registrazione-dto';
 
@@ -11,17 +12,19 @@ import { RichiediRegistrazioneDto } from './richiedi-registrazione-dto';
 export class AppComponent {
 
   sessione: string;
+  contatti: Chat[];
   req = new RichiediRegistrazioneDto();
   reg = new RegistrazioneDto();
 
   constructor(private http: HttpClient) { }
 
   registrazione() {
-    let oss = this.http.post<RegistrazioneDto>("/registrazione", this.req);
+    let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/registrazione", this.req);
     oss.subscribe(r => {
-      this.reg = r;
-      this.req.nickname = "";
+      this.sessione = r.sessione;
+      this.contatti = r.contatti;
     });
+    this.req.nickname = "";
   }
   inviaTutti() { }
   invia() { }

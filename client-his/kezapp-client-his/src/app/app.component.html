@@ -17,8 +17,8 @@
     <th>Nick name</th>
     <th>Azione</th>
   </tr>
-  <tr>
-    <td></td>
+  <tr *ngFor="let c of contatti">
+    <td>{{c.nickname}}</td>
     <td>
       <button (click)="invia()">Invia</button>
     </td>
