@@ -1,10 +1,12 @@
 <div *ngIf="sessione == null">
 <input type="text" [(ngModel)]="req.nickname">
 <button (click)="registrazione()">Registrati</button>
+<h4>{{erroreNickname}}</h4>
 </div>
 <br>
 <br>
 <div *ngIf="sessione != null">
+<h2>Nome utente: {{req.nickname}}</h2>
 <input type="text">
 <button (click)="inviaTutti()">Invia a tutti</button>
 <br>
@@ -27,10 +29,12 @@
 <button (click)="aggiorna()">Aggiorna</button>
 <br>
 <br>
+<h3 *ngIf="messaggi.length == 0">Nessun messaggio ricevuto, aggiornare per controllare se ci sono nuovi messaggi</h3>
+<div *ngIf="messaggi.length > 0">
 <h3>Messaggi ricevuti</h3>
 <br>
 <br>
-<table *ngIf="messaggi.length > 0">
+<table >
   <tr>
     <th>Mittente</th>
     <th>Messaggio</th>
@@ -40,4 +44,5 @@
     <td></td>
   </tr>
 </table>
+</div>
 </div>

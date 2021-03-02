@@ -1,6 +1,5 @@
 package it.sirfin.kezappserverhis.service.impl;
 
-
 import it.sirfin.kezappserverhis.dto.RegistrazioneDto;
 import it.sirfin.kezappserverhis.dto.RichiediRegistrazioneDto;
 import it.sirfin.kezappserverhis.model.Chat;
@@ -17,17 +16,23 @@ public class KezappServiceImpl implements KezappService {
     @Autowired
     ChatRepository chatRepository;
     MessaggioRepository messaggioRepository;
-    
+
     @Override
     public RegistrazioneDto registrazione(RichiediRegistrazioneDto reqDto) {
-        Chat chat = new Chat(reqDto.getNickname());
-        chatRepository.save(chat);
-        RegistrazioneDto regDto = new RegistrazioneDto();
-        regDto.setSessione(chat.getSessione());
-        regDto.setContatti(chatRepository.findAll());
-        //Da implemenare restituzione di messaggi che corrispondono solo
-        //alla sessione
-        return regDto;
+        //controllo nel DB se il nickname già esiste. Nel caso non esista la query
+        //tornerà una lista con dimensione 0 per cui posso accettare il nickname
+        //e creare il nuovo record nella tabella chat
+        if (chatRepository.findByNickname(reqDto.getNickname()).isEmpty()) {
+            Chat chat = new Chat(reqDto.getNickname());
+            chatRepository.save(chat);
+//            RegistrazioneDto regDto = new RegistrazioneDto();
+//            regDto.setSessione(chat.getSessione());
+//            regDto.setContatti(chatRepository.findAll());
+            //Da implemenare restituzione di messaggi che corrispondono solo
+            //alla sessione
+            return new RegistrazioneDto(chatRepository.findAll(), null, chat.getSessione());
+        }
+        return new RegistrazioneDto();
     }
 
     @Override

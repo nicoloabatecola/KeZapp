@@ -15,22 +15,28 @@ export class AppComponent {
   sessione: string;
   contatti: Chat[] = [];
   messaggi: Messaggio[] = [];
+  erroreNickname: string;
   req = new RichiediRegistrazioneDto();
   reg = new RegistrazioneDto();
 
   constructor(private http: HttpClient) { }
 
   registrazione() {
-    let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/registrazione", this.req);
-    oss.subscribe(r => {
-      this.sessione = r.sessione;
-      this.contatti = r.contatti;
-    });
-    this.req.nickname = "";
+    if (this.req.nickname) {
+      let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/registrazione", this.req);
+      oss.subscribe(r => {
+        if (r.sessione == null) {
+          this.erroreNickname = "Nickname non disponibile";
+        } else {
+          this.sessione = r.sessione;
+          this.contatti = r.contatti;
+        }
+      });
+    }else this.erroreNickname = "devi inserire un nickname";
   }
   inviaTutti() { }
   invia() { }
-  aggiorna() { 
+  aggiorna() {
     let oss = this.http.get<Chat[]>("http://localhost:8080/aggiorna");
     oss.subscribe(r => {
       this.contatti = r;
