@@ -22,24 +22,24 @@ public class KeZappController {
     @RequestMapping("/registrazione")
     @ResponseBody
     public RichiediRegistrazioneDto registrazione() {
-        return new RichiediRegistrazioneDto(kezappservice.registrazione());
+        return new RichiediRegistrazioneDto();
     }
 
     @RequestMapping("/inviatutti")
     @ResponseBody
     public RichiediMessaggiDto inviaTutti() {
-        return new RichiediMessaggiDto(kezappservice.inviaTutti(Messaggio));
+        return new RichiediMessaggiDto();
     }
 
     @RequestMapping("/inviauno")
     @ResponseBody
     public InviaMessaggioDto inviaUno() {
-        return new InviaMessaggioDto(kezappservice.inviaUno(Messaggio));
+        return new InviaMessaggioDto();
     }
 
     @RequestMapping("/aggiorna")
     @ResponseBody
     public RichiediMessaggiDto aggiorna() {
-        return new RichiediMessaggiDto(kezappservice.aggiorna(Chat));
+        return new RichiediMessaggiDto();
     }
 }
