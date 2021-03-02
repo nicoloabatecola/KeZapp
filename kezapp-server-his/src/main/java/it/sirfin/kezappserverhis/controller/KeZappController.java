@@ -4,8 +4,10 @@ import it.sirfin.kezappserverhis.dto.InviaMessaggioDto;
 import it.sirfin.kezappserverhis.dto.RegistrazioneDto;
 import it.sirfin.kezappserverhis.dto.RichiediMessaggiDto;
 import it.sirfin.kezappserverhis.dto.RichiediRegistrazioneDto;
+import it.sirfin.kezappserverhis.model.Chat;
 import it.sirfin.kezappserverhis.model.Messaggio;
 import it.sirfin.kezappserverhis.service.KezappService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,7 +42,7 @@ public class KeZappController {
 
     @RequestMapping("/aggiorna")
     @ResponseBody
-    public RichiediMessaggiDto aggiorna() {
-        return new RichiediMessaggiDto();
+    public List<Chat> aggiorna() {
+        return kezappservice.aggiorna();
     }
 }

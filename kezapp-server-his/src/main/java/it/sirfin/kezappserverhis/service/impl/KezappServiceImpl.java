@@ -7,6 +7,7 @@ import it.sirfin.kezappserverhis.model.Chat;
 import it.sirfin.kezappserverhis.repository.ChatRepository;
 import it.sirfin.kezappserverhis.repository.MessaggioRepository;
 import it.sirfin.kezappserverhis.service.KezappService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,8 +41,8 @@ public class KezappServiceImpl implements KezappService {
     }
 
     @Override
-    public void aggiorna() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Chat> aggiorna() {
+        return chatRepository.findAll();
     }
 
 }

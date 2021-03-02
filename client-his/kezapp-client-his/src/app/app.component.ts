@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Chat } from './chat';
+import { Messaggio } from './messaggio';
 import { RegistrazioneDto } from './registrazione-dto';
 import { RichiediRegistrazioneDto } from './richiedi-registrazione-dto';
 
@@ -12,7 +13,8 @@ import { RichiediRegistrazioneDto } from './richiedi-registrazione-dto';
 export class AppComponent {
 
   sessione: string;
-  contatti: Chat[];
+  contatti: Chat[] = [];
+  messaggi: Messaggio[] = [];
   req = new RichiediRegistrazioneDto();
   reg = new RegistrazioneDto();
 
@@ -28,5 +30,10 @@ export class AppComponent {
   }
   inviaTutti() { }
   invia() { }
-  aggiorna() { }
+  aggiorna() { 
+    let oss = this.http.get<Chat[]>("http://localhost:8080/aggiorna");
+    oss.subscribe(r => {
+      this.contatti = r;
+    });
+  }
 }
