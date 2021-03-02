@@ -1,10 +1,11 @@
 package it.sirfin.kezappserverhis.controller;
 
 import it.sirfin.kezappserverhis.dto.InviaMessaggioDto;
+import it.sirfin.kezappserverhis.dto.RegistrazioneDto;
 import it.sirfin.kezappserverhis.dto.RichiediMessaggiDto;
 import it.sirfin.kezappserverhis.dto.RichiediRegistrazioneDto;
 import it.sirfin.kezappserverhis.model.Messaggio;
-import it.sirfin.kezappserverhis.service1.KezappService;
+import it.sirfin.kezappserverhis.service.KezappService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +22,8 @@ public class KeZappController {
 
     @RequestMapping("/registrazione")
     @ResponseBody
-    public RichiediRegistrazioneDto registrazione() {
-        return new RichiediRegistrazioneDto();
+    public RegistrazioneDto registrazione(@RequestBody RichiediRegistrazioneDto reqDto) {
+        return kezappservice.registrazione(reqDto);
     }
 
     @RequestMapping("/inviatutti")

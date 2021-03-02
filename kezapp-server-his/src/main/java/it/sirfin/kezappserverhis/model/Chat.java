@@ -23,18 +23,13 @@ public class Chat implements Serializable{
     public Chat() {
     }
 
-    public Chat(Long id, String nickname, String sessione) {
-        this.id = id;
+    public Chat(String nickname) {
         this.nickname = nickname;
-        this.sessione = sessione;
+        this.sessione = String.valueOf(Math.random()) + nickname;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNickname() {
@@ -47,10 +42,6 @@ public class Chat implements Serializable{
 
     public String getSessione() {
         return sessione;
-    }
-
-    public void setSessione(String sessione) {
-        this.sessione = sessione;
     }
 
     @Override
