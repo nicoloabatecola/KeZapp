@@ -1,6 +1,6 @@
 package it.sirfin.kezappserverhis.dto;
 
-public class RichiediRegistrazioneDto {
+ public class RichiediRegistrazioneDto {
 
     private String nickname;
 

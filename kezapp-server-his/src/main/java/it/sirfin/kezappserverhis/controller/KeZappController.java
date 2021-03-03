@@ -1,4 +1,4 @@
-package it.sirfin.kezappserverhis.controller;
+ package it.sirfin.kezappserverhis.controller;
 
 import it.sirfin.kezappserverhis.dto.InviaMessaggioDto;
 import it.sirfin.kezappserverhis.dto.RegistrazioneDto;
@@ -42,8 +42,8 @@ public class KeZappController {
 
     @RequestMapping("/aggiorna")
     @ResponseBody
-    public List<Chat> aggiorna() {
-        return kezappservice.aggiorna();
+    public RegistrazioneDto aggiorna() {
+        return kezappservice.aggiorna("");
     }
     
     //metodo svuota db, serve solo a resettare il db in maniera più rapida senza

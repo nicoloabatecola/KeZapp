@@ -4,6 +4,7 @@ import { Chat } from './chat';
 import { InviaMessaggioDto } from './invia-messaggio-dto';
 import { Messaggio } from './messaggio';
 import { RegistrazioneDto } from './registrazione-dto';
+import { RichiediMessaggiDto } from './richiedi-messaggi-dto';
 import { RichiediRegistrazioneDto } from './richiedi-registrazione-dto';
 
 @Component({
@@ -34,7 +35,7 @@ export class AppComponent {
           this.contatti = r.contatti;
         }
       });
-    }else this.erroreNickname = "messaggio errore";
+    } else this.erroreNickname = "messaggio errore";
   }
   inviaTutti() {
     this.inviaMessaggioDto.destinatario = "tutti";
@@ -45,17 +46,20 @@ export class AppComponent {
       //this.messaggi = r.messaggi;
     });
     this.inviaMessaggioDto.messaggio = "";
-   }
+  }
   invia() { }
   aggiorna() {
-    let oss = this.http.get<Chat[]>("http://localhost:8080/aggiorna");
+    let richiediMessaggiDto = new RichiediMessaggiDto(); 
+    richiediMessaggiDto.sessione = this.sessione;
+    let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/aggiorna", richiediMessaggiDto);
     oss.subscribe(r => {
-      this.contatti = r;
+      this.contatti = r.contatti;
+      this.messaggi = r.messaggi;
     });
   }
 
   svuotaDB() {
     let oss = this.http.get<boolean>("http://localhost:8080/svuotaDB");
-    oss.subscribe();     
+    oss.subscribe();
   }
 }

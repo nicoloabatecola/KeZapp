@@ -48,11 +48,7 @@ public class KezappServiceImpl implements KezappService {
         messaggio.setTesto(inviaMessaggioDto.getMessaggio());
         System.out.println(messaggio);
         messaggioRepository.save(messaggio);
-        RegistrazioneDto regDto = new RegistrazioneDto();
-        regDto.setContatti(chatRepository.findAll());
-        String utenteInteressato = inviaMessaggioDto.getSessione();
-//        regDto.setMessaggi(messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(utenteInteressato, "tutti"));
-        return regDto;
+        return aggiorna(inviaMessaggioDto.getSessione());
     }
 
     @Override
@@ -62,10 +58,11 @@ public class KezappServiceImpl implements KezappService {
 
     @Override
     public RegistrazioneDto aggiorna(String utenteInteressato) {
-        
+
         RegistrazioneDto regDto = new RegistrazioneDto();
         regDto.setContatti(chatRepository.findAll());
         regDto.setMessaggi(messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(utenteInteressato, "tutti"));
+        messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(utenteInteressato, "tutti").forEach(a -> System.out.println(a));
         
         return regDto;
     }
@@ -76,5 +73,4 @@ public class KezappServiceImpl implements KezappService {
         messaggioRepository.deleteAllInBatch();
     }
 
-    
 }
