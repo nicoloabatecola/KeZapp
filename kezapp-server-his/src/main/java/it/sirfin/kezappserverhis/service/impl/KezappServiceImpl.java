@@ -33,7 +33,7 @@ public class KezappServiceImpl implements KezappService {
             chatRepository.save(chat);
             //Da implemenare restituzione di messaggi che corrispondono solo
             //alla sessione
-            return new RegistrazioneDto(chatRepository.findAll(), null, chat.getSessione());
+            return new RegistrazioneDto(chatRepository.findAll(), messaggioRepository.findAll(), chat.getSessione());
         }
         return new RegistrazioneDto();
     }
@@ -61,8 +61,12 @@ public class KezappServiceImpl implements KezappService {
     }
 
     @Override
-    public List<Chat> aggiorna() {
-        return chatRepository.findAll();
+    public RegistrazioneDto aggiorna() {
+        
+        RegistrazioneDto regDto = new RegistrazioneDto();
+        regDto.setContatti(chatRepository.findAll());
+        regDto.setMessaggi(messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(utenteInteressato, tutti));
+        return;
     }
 
     @Override
