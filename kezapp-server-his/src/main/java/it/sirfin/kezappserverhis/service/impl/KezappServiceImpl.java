@@ -1,8 +1,10 @@
 package it.sirfin.kezappserverhis.service.impl;
 
+import it.sirfin.kezappserverhis.dto.InviaMessaggioDto;
 import it.sirfin.kezappserverhis.dto.RegistrazioneDto;
 import it.sirfin.kezappserverhis.dto.RichiediRegistrazioneDto;
 import it.sirfin.kezappserverhis.model.Chat;
+import it.sirfin.kezappserverhis.model.Messaggio;
 import it.sirfin.kezappserverhis.repository.ChatRepository;
 import it.sirfin.kezappserverhis.repository.MessaggioRepository;
 import it.sirfin.kezappserverhis.service.KezappService;
@@ -35,8 +37,16 @@ public class KezappServiceImpl implements KezappService {
     }
     
     @Override
-    public void inviaTutti() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public RegistrazioneDto inviaTutti(InviaMessaggioDto inviaMessaggioDto) {
+        //Crea un oggetto messaggio recuperando le informazioni da inviaMessaggioDto
+        //originariamente spedito da client e lo salva su DB
+        Messaggio messaggio = new Messaggio();
+        messaggio.setAliasDestinatario(inviaMessaggioDto.getDestinatario());
+        messaggio.setAliasMittente(inviaMessaggioDto.getSessione());
+        messaggio.setTesto(inviaMessaggioDto.getMessaggio());
+        messaggioRepository.save(messaggio);
+        RegistrazioneDto regDto = new RegistrazioneDto();
+        regDto.setContatti(chatRepository.findAll());
     }
     
     @Override

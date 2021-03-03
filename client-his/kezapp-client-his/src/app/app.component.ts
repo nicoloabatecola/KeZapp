@@ -34,12 +34,15 @@ export class AppComponent {
           this.contatti = r.contatti;
         }
       });
-    }else this.erroreNickname = 
+    }else this.erroreNickname = "messaggio errore";
   }
   inviaTutti() {
-    let oss = this.http.post<[]>("http://localhost:8080/aggiorna", );
+    this.inviaMessaggioDto.destinatario = "tutti";
+    this.inviaMessaggioDto.sessione = this.sessione;
+    let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/inviaTutti", this.inviaMessaggioDto);
     oss.subscribe(r => {
-      
+      this.contatti = r.contatti;
+      this.messaggi = r.messaggi;
     });
    }
   invia() { }
