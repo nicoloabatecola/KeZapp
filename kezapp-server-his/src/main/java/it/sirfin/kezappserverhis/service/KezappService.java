@@ -12,6 +12,6 @@ public interface KezappService {
     RegistrazioneDto registrazione(RichiediRegistrazioneDto reqDto);
     RegistrazioneDto inviaTutti(InviaMessaggioDto inviaMessaggioDto);
     void inviaUno();
-    RegistrazioneDto aggiorna();
+    RegistrazioneDto aggiorna(String utenteInteressato);
     void svuotaDB();
 }

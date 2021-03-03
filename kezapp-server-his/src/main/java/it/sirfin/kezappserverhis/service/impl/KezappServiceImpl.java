@@ -61,12 +61,13 @@ public class KezappServiceImpl implements KezappService {
     }
 
     @Override
-    public RegistrazioneDto aggiorna() {
+    public RegistrazioneDto aggiorna(String utenteInteressato) {
         
         RegistrazioneDto regDto = new RegistrazioneDto();
         regDto.setContatti(chatRepository.findAll());
-        regDto.setMessaggi(messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(utenteInteressato, tutti));
-        return;
+        regDto.setMessaggi(messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(utenteInteressato, "tutti"));
+        
+        return regDto;
     }
 
     @Override
