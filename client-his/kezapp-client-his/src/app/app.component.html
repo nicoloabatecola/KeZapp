@@ -12,6 +12,7 @@
 <br>
 <br>
 <h3>Contatti</h3>
+
 <table *ngIf="contatti.length > 0">
   <tr>
     <th>Nickname</th>
@@ -20,10 +21,11 @@
   <tr *ngFor="let c of contatti">
     <td>{{c.nickname}}</td>
     <td>
-      <button (click)="invia()">Invia</button>
+      <button (click)="invia(c)">Invia</button>
     </td>
   </tr>
 </table>
+
 <br>
 <br>
 <button (click)="aggiorna()">Aggiorna</button>
@@ -32,6 +34,7 @@
 <h3 *ngIf="messaggi.length == 0">Nessun messaggio ricevuto, aggiornare per controllare se ci sono nuovi messaggi</h3>
 <div *ngIf="messaggi.length > 0">
 <h3>Messaggi ricevuti</h3>
+
 <table >
   <tr>
     <th>Mittente</th>

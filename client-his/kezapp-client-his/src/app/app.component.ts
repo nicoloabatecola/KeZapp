@@ -25,6 +25,7 @@ export class AppComponent {
   constructor(private http: HttpClient) { }
 
   registrazione() {
+
     if (this.req.nickname) {
       let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/registrazione", this.req);
       oss.subscribe(r => {
@@ -42,19 +43,30 @@ export class AppComponent {
     this.inviaMessaggioDto.sessione = this.sessione;
     let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/inviatutti", this.inviaMessaggioDto);
     oss.subscribe(r => {
-      //this.contatti = r.contatti;
-      //this.messaggi = r.messaggi;
+      this.contatti = r.contatti;
+      this.messaggi = r.messaggi;
     });
     this.inviaMessaggioDto.messaggio = "";
   }
-  invia() { }
+
+  invia(c: Chat) {
+    this.inviaMessaggioDto.destinatario = c.sessione;
+    this.inviaMessaggioDto.sessione = this.sessione;
+    let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/inviauno", this.inviaMessaggioDto);
+    oss.subscribe(r => {
+      this.contatti = r.contatti;
+      this.messaggi = r.messaggi;
+    });
+    this.inviaMessaggioDto.messaggio = "";
+  }
   aggiorna() {
-    let richiediMessaggiDto = new RichiediMessaggiDto(); 
+    let richiediMessaggiDto = new RichiediMessaggiDto();
     richiediMessaggiDto.sessione = this.sessione;
     let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/aggiorna", richiediMessaggiDto);
     oss.subscribe(r => {
       this.contatti = r.contatti;
       this.messaggi = r.messaggi;
+
     });
   }
 

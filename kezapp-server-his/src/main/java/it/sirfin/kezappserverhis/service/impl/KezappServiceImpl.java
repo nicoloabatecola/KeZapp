@@ -52,8 +52,16 @@ public class KezappServiceImpl implements KezappService {
     }
 
     @Override
-    public void inviaUno() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public RegistrazioneDto inviaUno(InviaMessaggioDto inviaMessaggioDto) {
+        Messaggio messaggio = new Messaggio();
+        messaggio.setAliasDestinatario(inviaMessaggioDto.getDestinatario());
+        messaggio.setAliasMittente(inviaMessaggioDto.getSessione());
+        messaggio.setTesto(inviaMessaggioDto.getMessaggio());
+        System.out.println(messaggio);
+        messaggioRepository.save(messaggio);
+        messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(inviaMessaggioDto.getSessione(), "tutti")
+                .forEach(x -> System.out.println(x));
+        return aggiorna(inviaMessaggioDto.getSessione());
     }
 
     @Override

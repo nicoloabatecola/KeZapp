@@ -36,8 +36,8 @@ public class KeZappController {
 
     @RequestMapping("/inviauno")
     @ResponseBody
-    public InviaMessaggioDto inviaUno() {
-        return new InviaMessaggioDto();
+    public RegistrazioneDto inviaUno(@RequestBody InviaMessaggioDto m) {
+        return  kezappservice.inviaUno(m);
     }
 
     @RequestMapping("/aggiorna")
