@@ -34,9 +34,10 @@ export class AppComponent {
         } else {
           this.sessione = r.sessione;
           this.contatti = r.contatti;
+          this.contatti = this.contatti.filter(c => c.sessione != this.sessione);
         }
       });
-    } else this.erroreNickname = "messaggio errore";
+    } else this.erroreNickname = "Il nickname non può essere nullo";
   }
   inviaTutti() {
     this.inviaMessaggioDto.destinatario = "tutti";
@@ -44,6 +45,7 @@ export class AppComponent {
     let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/inviatutti", this.inviaMessaggioDto);
     oss.subscribe(r => {
       this.contatti = r.contatti;
+      this.contatti = this.contatti.filter(c => c.sessione != this.sessione);
       this.messaggi = r.messaggi;
     });
     this.inviaMessaggioDto.messaggio = "";
@@ -55,6 +57,7 @@ export class AppComponent {
     let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/inviauno", this.inviaMessaggioDto);
     oss.subscribe(r => {
       this.contatti = r.contatti;
+      this.contatti = this.contatti.filter(c => c.sessione != this.sessione);
       this.messaggi = r.messaggi;
     });
     this.inviaMessaggioDto.messaggio = "";
@@ -66,8 +69,8 @@ export class AppComponent {
     let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/aggiorna", richiediMessaggiDto);
     oss.subscribe(r => {
       this.contatti = r.contatti;
+      this.contatti = this.contatti.filter(c => c.sessione != this.sessione);
       this.messaggi = r.messaggi;
-
     });
   }
 
