@@ -32,16 +32,14 @@
 <h3 *ngIf="messaggi.length == 0">Nessun messaggio ricevuto, aggiornare per controllare se ci sono nuovi messaggi</h3>
 <div *ngIf="messaggi.length > 0">
 <h3>Messaggi ricevuti</h3>
-<br>
-<br>
 <table >
   <tr>
     <th>Mittente</th>
     <th>Messaggio</th>
   </tr>
-  <tr>
-    <td></td>
-    <td></td>
+  <tr *ngFor="let m of messaggi">
+    <td>{{m.aliasMittente}}</td>
+    <td>{{m.testo}}</td>
   </tr>
 </table>
 </div>
