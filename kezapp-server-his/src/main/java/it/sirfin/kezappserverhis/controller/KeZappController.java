@@ -42,8 +42,8 @@ public class KeZappController {
 
     @RequestMapping("/aggiorna")
     @ResponseBody
-    public RegistrazioneDto aggiorna() {
-        return kezappservice.aggiorna("");
+    public RegistrazioneDto aggiorna(@RequestBody RichiediMessaggiDto r) {
+        return kezappservice.aggiorna(r.getSessione());
     }
     
     //metodo svuota db, serve solo a resettare il db in maniera più rapida senza

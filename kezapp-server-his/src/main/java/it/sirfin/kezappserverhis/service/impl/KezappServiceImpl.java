@@ -53,25 +53,30 @@ public class KezappServiceImpl implements KezappService {
 
     @Override
     public RegistrazioneDto inviaUno(InviaMessaggioDto inviaMessaggioDto) {
+        System.out.println("*********************************************test***************");
+        System.out.println(inviaMessaggioDto);
+        System.out.println("*********************************************test***************");
         Messaggio messaggio = new Messaggio();
         messaggio.setAliasDestinatario(inviaMessaggioDto.getDestinatario());
         messaggio.setAliasMittente(inviaMessaggioDto.getSessione());
         messaggio.setTesto(inviaMessaggioDto.getMessaggio());
         System.out.println(messaggio);
         messaggioRepository.save(messaggio);
-        messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(inviaMessaggioDto.getSessione(), "tutti")
-                .forEach(x -> System.out.println(x));
+        List<Messaggio> listaTest = messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(inviaMessaggioDto.getSessione(), "tutti");
+        System.out.println("*********************************************test***************");
+        listaTest.forEach(x -> System.out.println(x));
+        System.out.println("*********************************************test***************");
         return aggiorna(inviaMessaggioDto.getSessione());
     }
 
     @Override
     public RegistrazioneDto aggiorna(String utenteInteressato) {
-
+        System.out.println("utente interessato: " + utenteInteressato);
         RegistrazioneDto regDto = new RegistrazioneDto();
         regDto.setContatti(chatRepository.findAll());
         regDto.setMessaggi(messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(utenteInteressato, "tutti"));
         messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(utenteInteressato, "tutti").forEach(a -> System.out.println(a));
-        
+
         return regDto;
     }
 

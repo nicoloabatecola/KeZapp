@@ -62,6 +62,7 @@ export class AppComponent {
   aggiorna() {
     let richiediMessaggiDto = new RichiediMessaggiDto();
     richiediMessaggiDto.sessione = this.sessione;
+    console.log(this.sessione);
     let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/aggiorna", richiediMessaggiDto);
     oss.subscribe(r => {
       this.contatti = r.contatti;
