@@ -24,10 +24,8 @@ public class KezappServiceImpl implements KezappService {
         //e creare il nuovo record nella tabella chat
         if (chatRepository.findByNickname(reqDto.getNickname()).isEmpty()) {
             Chat chat = new Chat(reqDto.getNickname());
-            chatRepository.save(chat);
-//            RegistrazioneDto regDto = new RegistrazioneDto();
-//            regDto.setSessione(chat.getSessione());
-//            regDto.setContatti(chatRepository.findAll());
+            chat = chatRepository.save(chat);
+            chat.setSessione(chat.getId().toString());
             //Da implemenare restituzione di messaggi che corrispondono solo
             //alla sessione
             return new RegistrazioneDto(chatRepository.findAll(), null, chat.getSessione());

@@ -8,15 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Chat implements Serializable{
-    
+public class Chat implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column
     private String nickname;
-    
+
     @Column
     private String sessione;
 
@@ -25,7 +25,7 @@ public class Chat implements Serializable{
 
     public Chat(String nickname) {
         this.nickname = nickname;
-        this.sessione = String.valueOf(Math.random()) + nickname;
+//        this.sessione = String.valueOf(Math.random()) + nickname;
     }
 
     public Long getId() {
@@ -34,6 +34,10 @@ public class Chat implements Serializable{
 
     public String getNickname() {
         return nickname;
+    }
+
+    public void setSessione(String sessione) {
+        this.sessione = sessione;
     }
 
     public void setNickname(String nickname) {
@@ -48,10 +52,5 @@ public class Chat implements Serializable{
     public String toString() {
         return "Chat{" + "id=" + id + ", nickname=" + nickname + ", sessione=" + sessione + '}';
     }
-    
-    
-    
-    
-    
-    
+
 }
