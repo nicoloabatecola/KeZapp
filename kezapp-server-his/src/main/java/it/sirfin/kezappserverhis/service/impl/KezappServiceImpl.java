@@ -14,11 +14,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class KezappServiceImpl implements KezappService {
-    
+
     @Autowired
     ChatRepository chatRepository;
+
+    @Autowired
     MessaggioRepository messaggioRepository;
-    
+
     @Override
     public RegistrazioneDto registrazione(RichiediRegistrazioneDto reqDto) {
         //controllo nel DB se il nickname già esiste. Nel caso non esista la query
@@ -35,7 +37,7 @@ public class KezappServiceImpl implements KezappService {
         }
         return new RegistrazioneDto();
     }
-    
+
     @Override
     public RegistrazioneDto inviaTutti(InviaMessaggioDto inviaMessaggioDto) {
         //Crea un oggetto messaggio recuperando le informazioni da inviaMessaggioDto
@@ -44,19 +46,24 @@ public class KezappServiceImpl implements KezappService {
         messaggio.setAliasDestinatario(inviaMessaggioDto.getDestinatario());
         messaggio.setAliasMittente(inviaMessaggioDto.getSessione());
         messaggio.setTesto(inviaMessaggioDto.getMessaggio());
+        System.out.println(messaggio);
         messaggioRepository.save(messaggio);
+
         RegistrazioneDto regDto = new RegistrazioneDto();
         regDto.setContatti(chatRepository.findAll());
+        String utenteInteressato = inviaMessaggioDto.getSessione();
+//        regDto.setMessaggi(messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(utenteInteressato, "tutti"));
+        return regDto;
     }
-    
+
     @Override
     public void inviaUno() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public List<Chat> aggiorna() {
         return chatRepository.findAll();
     }
-    
+
 }

@@ -30,8 +30,8 @@ public class KeZappController {
 
     @RequestMapping("/inviatutti")
     @ResponseBody
-    public RichiediMessaggiDto inviaTutti() {
-        return new RichiediMessaggiDto();
+    public RegistrazioneDto inviaTutti(@RequestBody InviaMessaggioDto m) {
+        return kezappservice.inviaTutti(m);
     }
 
     @RequestMapping("/inviauno")

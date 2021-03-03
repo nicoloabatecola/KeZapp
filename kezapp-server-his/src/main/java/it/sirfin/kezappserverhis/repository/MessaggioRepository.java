@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface MessaggioRepository extends JpaRepository<Messaggio, Long>{
-    List<Messaggio> findByAliasDestinatarioOrAliasDestinatario(String destinatario, String tutti);
+    List<Messaggio> findByAliasDestinatarioOrAliasDestinatario(String utenteInteressato, String tutti);
 }

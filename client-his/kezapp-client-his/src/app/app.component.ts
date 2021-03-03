@@ -39,10 +39,10 @@ export class AppComponent {
   inviaTutti() {
     this.inviaMessaggioDto.destinatario = "tutti";
     this.inviaMessaggioDto.sessione = this.sessione;
-    let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/inviaTutti", this.inviaMessaggioDto);
+    let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/inviatutti", this.inviaMessaggioDto);
     oss.subscribe(r => {
-      this.contatti = r.contatti;
-      this.messaggi = r.messaggi;
+      //this.contatti = r.contatti;
+      //this.messaggi = r.messaggi;
     });
    }
   invia() { }
