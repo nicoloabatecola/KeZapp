@@ -44,6 +44,7 @@ export class AppComponent {
       //this.contatti = r.contatti;
       //this.messaggi = r.messaggi;
     });
+    this.inviaMessaggioDto.messaggio = "";
    }
   invia() { }
   aggiorna() {
@@ -51,5 +52,10 @@ export class AppComponent {
     oss.subscribe(r => {
       this.contatti = r;
     });
+  }
+
+  svuotaDB() {
+    let oss = this.http.get<boolean>("http://localhost:8080/svuotaDB");
+    oss.subscribe();     
   }
 }

@@ -13,4 +13,5 @@ public interface KezappService {
     RegistrazioneDto inviaTutti(InviaMessaggioDto inviaMessaggioDto);
     void inviaUno();
     List<Chat> aggiorna();
+    void svuotaDB();
 }

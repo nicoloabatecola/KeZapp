@@ -48,7 +48,6 @@ public class KezappServiceImpl implements KezappService {
         messaggio.setTesto(inviaMessaggioDto.getMessaggio());
         System.out.println(messaggio);
         messaggioRepository.save(messaggio);
-
         RegistrazioneDto regDto = new RegistrazioneDto();
         regDto.setContatti(chatRepository.findAll());
         String utenteInteressato = inviaMessaggioDto.getSessione();
@@ -66,4 +65,11 @@ public class KezappServiceImpl implements KezappService {
         return chatRepository.findAll();
     }
 
+    @Override
+    public void svuotaDB() {
+        chatRepository.deleteAllInBatch();
+        messaggioRepository.deleteAllInBatch();
+    }
+
+    
 }

@@ -45,4 +45,11 @@ public class KeZappController {
     public List<Chat> aggiorna() {
         return kezappservice.aggiorna();
     }
+    
+    //metodo svuota db, serve solo a resettare il db in maniera più rapida senza
+    //dover usare il client DB
+    @RequestMapping("/svuotaDB")
+    public void svuotaDB(){
+        kezappservice.svuotaDB();
+    }
 }
