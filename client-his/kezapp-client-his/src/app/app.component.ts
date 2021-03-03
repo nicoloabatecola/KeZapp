@@ -71,6 +71,16 @@ export class AppComponent {
     });
   }
 
+  ricavaNomeUtenteDaSessione(m: Messaggio): string {
+    let nicknameVisualizzato: string;
+    this.contatti.forEach(c => {
+      if (c.sessione.localeCompare(m.aliasDestinatario)) {
+        nicknameVisualizzato = c.nickname;
+      }
+    });
+    return nicknameVisualizzato;
+  }
+
   svuotaDB() {
     let oss = this.http.get<boolean>("http://localhost:8080/svuotaDB");
     oss.subscribe();

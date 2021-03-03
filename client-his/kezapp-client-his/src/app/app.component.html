@@ -41,7 +41,7 @@
     <th>Messaggio</th>
   </tr>
   <tr *ngFor="let m of messaggi">
-    <td>{{m.aliasMittente}}</td>
+    <td>{{ricavaNomeUtenteDaSessione(m)}}</td>
     <td>{{m.testo}}</td>
   </tr>
 </table>
