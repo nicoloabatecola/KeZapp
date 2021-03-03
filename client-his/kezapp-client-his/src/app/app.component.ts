@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Chat } from './chat';
+import { InviaMessaggioDto } from './invia-messaggio-dto';
 import { Messaggio } from './messaggio';
 import { RegistrazioneDto } from './registrazione-dto';
 import { RichiediRegistrazioneDto } from './richiedi-registrazione-dto';
@@ -18,6 +19,7 @@ export class AppComponent {
   erroreNickname: string;
   req = new RichiediRegistrazioneDto();
   reg = new RegistrazioneDto();
+  inviaMessaggioDto = new InviaMessaggioDto();
 
   constructor(private http: HttpClient) { }
 
@@ -32,9 +34,14 @@ export class AppComponent {
           this.contatti = r.contatti;
         }
       });
-    }else this.erroreNickname = "devi inserire un nickname";
+    }else this.erroreNickname = 
   }
-  inviaTutti() { }
+  inviaTutti() {
+    let oss = this.http.post<[]>("http://localhost:8080/aggiorna", );
+    oss.subscribe(r => {
+      
+    });
+   }
   invia() { }
   aggiorna() {
     let oss = this.http.get<Chat[]>("http://localhost:8080/aggiorna");
