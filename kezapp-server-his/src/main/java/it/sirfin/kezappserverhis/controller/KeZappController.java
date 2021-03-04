@@ -2,6 +2,7 @@ package it.sirfin.kezappserverhis.controller;
 
 import it.sirfin.kezappserverhis.dto.CancellaMessaggioDto;
 import it.sirfin.kezappserverhis.dto.InviaMessaggioDto;
+import it.sirfin.kezappserverhis.dto.LoginDto;
 import it.sirfin.kezappserverhis.dto.RegistrazioneDto;
 import it.sirfin.kezappserverhis.dto.RichiediMessaggiDto;
 import it.sirfin.kezappserverhis.dto.RichiediRegistrazioneDto;
@@ -22,6 +23,12 @@ public class KeZappController {
 
     @Autowired
     KezappService kezappservice;
+    
+    @RequestMapping("/login")
+    @ResponseBody
+    public String login(@RequestBody LoginDto logDto) {
+        return kezappservice.login(logDto);
+    }
 
     @RequestMapping("/registrazione")
     @ResponseBody

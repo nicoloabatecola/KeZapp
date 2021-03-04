@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
+import { LEADING_TRIVIA_CHARS } from '@angular/compiler/src/render3/view/template';
 import { Component } from '@angular/core';
 import { CancellaMessaggioDto } from './cancella-messaggio-dto';
 import { Chat } from './chat';
 import { InviaMessaggioDto } from './invia-messaggio-dto';
+import { LoginDto } from './login-dto';
 import { Messaggio } from './messaggio';
 import { RegistrazioneDto } from './registrazione-dto';
 import { RichiediMessaggiDto } from './richiedi-messaggi-dto';
@@ -22,12 +24,13 @@ export class AppComponent {
   req = new RichiediRegistrazioneDto();
   reg = new RegistrazioneDto();
   inviaMessaggioDto = new InviaMessaggioDto();
+  loginDto = new LoginDto();
 
   constructor(private http: HttpClient) { }
 
   registrazione() {
 
-    if (this.req.nickname) {
+    if (this.req.nickname && this.req.password) {
       let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/registrazione", this.req);
       oss.subscribe(r => {
         if (r.sessione == null) {
@@ -85,6 +88,13 @@ export class AppComponent {
       }
     });
     return nicknameVisualizzato;
+  }
+
+  login() {
+    let x = this.http.post<string>("http://localhost:8080/login", this.loginDto);
+    x.subscribe(r =>{
+     this.sessione = r;
+    });
   }
 
   svuotaDB() {

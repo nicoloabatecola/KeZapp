@@ -2,6 +2,7 @@ package it.sirfin.kezappserverhis.service.impl;
 
 import it.sirfin.kezappserverhis.dto.CancellaMessaggioDto;
 import it.sirfin.kezappserverhis.dto.InviaMessaggioDto;
+import it.sirfin.kezappserverhis.dto.LoginDto;
 import it.sirfin.kezappserverhis.dto.RegistrazioneDto;
 import it.sirfin.kezappserverhis.dto.RichiediRegistrazioneDto;
 import it.sirfin.kezappserverhis.model.Chat;
@@ -21,6 +22,8 @@ public class KezappServiceImpl implements KezappService {
 
     @Autowired
     MessaggioRepository messaggioRepository;
+    
+    
 
     @Override
     public RegistrazioneDto registrazione(RichiediRegistrazioneDto reqDto) {
@@ -119,6 +122,11 @@ public class KezappServiceImpl implements KezappService {
     public void svuotaDB() {
         chatRepository.deleteAllInBatch();
         messaggioRepository.deleteAllInBatch();
+    }
+
+    @Override
+    public String login(LoginDto logDto) {
+       return  chatRepository.findByNicknameAndPassword(logDto.getNickname(), logDto.getPassword()).getSessione();
     }
 
 }
