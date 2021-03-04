@@ -1,14 +1,24 @@
 package it.sirfin.kezappserverhis.dto;
 
- public class RichiediRegistrazioneDto {
+public class RichiediRegistrazioneDto {
 
     private String nickname;
+    private String password;
 
     public RichiediRegistrazioneDto() {
     }
 
-    public RichiediRegistrazioneDto(String nickname) {
+    public RichiediRegistrazioneDto(String nickname, String password) {
         this.nickname = nickname;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getNickname() {
@@ -21,9 +31,9 @@ package it.sirfin.kezappserverhis.dto;
 
     @Override
     public String toString() {
-        return "RichiediRegistrazioneDto{" + "nickname=" + nickname + '}';
+        return "RichiediRegistrazioneDto{" + "nickname=" + nickname + ", password=" + password + '}';
     }
-    
-    
+
+
 
 }

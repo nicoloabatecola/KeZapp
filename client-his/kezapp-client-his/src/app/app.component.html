@@ -1,5 +1,14 @@
 <div *ngIf="sessione == null">
-<input type="text" [(ngModel)]="req.nickname">
+<h3>Login</h3>
+Nickname<input type="text" [(ngModel)]="loginDto.nickname">
+Password<input type="password" [(ngModel)]="loginDto.password">
+<button (click)="login()">Login</button>
+<br>
+<br>
+<hr>
+<h3>Registrazione</h3>
+Nickname <input type="text" [(ngModel)]="req.nickname">
+Password <input type="password" [(ngModel)]="req.password">
 <button (click)="registrazione()">Registrati</button>
 <h4>{{erroreNickname}}</h4>
 </div>

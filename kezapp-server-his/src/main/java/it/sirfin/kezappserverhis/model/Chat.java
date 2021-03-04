@@ -20,12 +20,24 @@ public class Chat implements Serializable {
     @Column
     private String sessione;
 
+    @Column
+    private String password;
+
     public Chat() {
     }
 
-    public Chat(String nickname) {
+    public Chat(String nickname, String password) {
         this.nickname = nickname;
+        this.password = password;
 //        this.sessione = String.valueOf(Math.random()) + nickname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getId() {
@@ -50,7 +62,7 @@ public class Chat implements Serializable {
 
     @Override
     public String toString() {
-        return "Chat{" + "id=" + id + ", nickname=" + nickname + ", sessione=" + sessione + '}';
+        return "Chat{" + "id=" + id + ", nickname=" + nickname + ", sessione=" + sessione + ", password=" + password + '}';
     }
 
 }

@@ -28,7 +28,7 @@ public class KezappServiceImpl implements KezappService {
         //tornerà una lista con dimensione 0 per cui posso accettare il nickname
         //e creare il nuovo record nella tabella chat
         if (chatRepository.findByNickname(reqDto.getNickname()).isEmpty()) {
-            Chat chat = new Chat(reqDto.getNickname());
+            Chat chat = new Chat(reqDto.getNickname(), reqDto.getPassword());
             chat = chatRepository.save(chat);
             chat.setSessione(chat.getId().toString());
             chatRepository.save(chat);
