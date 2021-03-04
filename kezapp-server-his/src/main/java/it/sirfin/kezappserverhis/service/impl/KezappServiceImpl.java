@@ -34,8 +34,7 @@ public class KezappServiceImpl implements KezappService {
             //Da implemenare restituzione di messaggi che corrispondono solo
             //alla sessione
             return new RegistrazioneDto(chatRepository.findAll(), messaggioRepository.findAll(), chat.getSessione());
-        }
-        return new RegistrazioneDto();
+        } else return new RegistrazioneDto();
     }
 
     @Override
