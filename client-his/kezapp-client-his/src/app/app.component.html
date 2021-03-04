@@ -39,10 +39,12 @@
   <tr>
     <th>Mittente</th>
     <th>Messaggio</th>
+    <th>Cancellazione</th>
   </tr>
   <tr *ngFor="let m of messaggi">
     <td>{{m.aliasMittente}}</td>
     <td>{{m.testo}}</td>
+    <td><button (click)="cancella(m)">cancella</button></td>
   </tr>
 </table>
 </div>

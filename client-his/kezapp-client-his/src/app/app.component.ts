@@ -60,6 +60,7 @@ export class AppComponent {
       this.contatti = this.contatti.filter(c => c.sessione != this.sessione);
       this.messaggi = r.messaggi;
     });
+
     this.inviaMessaggioDto.messaggio = "";
   }
   aggiorna() {
@@ -88,5 +89,15 @@ export class AppComponent {
   svuotaDB() {
     let oss = this.http.get<boolean>("http://localhost:8080/svuotaDB");
     oss.subscribe();
+  }
+
+  cancella(r: Messaggio) {
+
+    let oss = this.http.post<Messaggio[]>("http://localhost:8080/cancellaMessaggio", r);
+    oss.subscribe(r => {
+      this.messaggi = r;
+    });
+
+
   }
 }
