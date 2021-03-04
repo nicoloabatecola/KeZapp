@@ -15,7 +15,7 @@ Password <input type="password" [(ngModel)]="req.password">
 <br>
 <br>
 <div *ngIf="sessione != null">
-<h2>Nome utente: {{req.nickname}}</h2>
+<h2>Nome utente: {{req.nickname}}{{loginDto.nickname}}</h2>
 <input type="text" [(ngModel)]="inviaMessaggioDto.messaggio">
 <button (click)="inviaTutti()">Invia a tutti</button>
 <br>

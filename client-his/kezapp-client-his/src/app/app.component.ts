@@ -94,6 +94,7 @@ export class AppComponent {
     let x = this.http.post<string>("http://localhost:8080/login", this.loginDto);
     x.subscribe(r =>{
      this.sessione = r;
+     this.aggiorna();
     });
   }
 
