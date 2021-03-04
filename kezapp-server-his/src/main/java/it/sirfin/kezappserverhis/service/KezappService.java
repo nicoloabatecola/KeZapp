@@ -1,6 +1,7 @@
 
 package it.sirfin.kezappserverhis.service;
 
+import it.sirfin.kezappserverhis.dto.CancellaMessaggioDto;
 import it.sirfin.kezappserverhis.dto.InviaMessaggioDto;
 import it.sirfin.kezappserverhis.dto.RegistrazioneDto;
 import it.sirfin.kezappserverhis.dto.RichiediRegistrazioneDto;
@@ -14,6 +15,7 @@ public interface KezappService {
     RegistrazioneDto inviaTutti(InviaMessaggioDto inviaMessaggioDto);
     RegistrazioneDto inviaUno(InviaMessaggioDto inviaMessaggioDto);
     RegistrazioneDto aggiorna(String utenteInteressato);
+    List<Messaggio> cancellaMessaggio(CancellaMessaggioDto cancDto);
     void svuotaDB();
     Messaggio allineaNickConSessione(List<Chat> contatti,InviaMessaggioDto inviaMessaggiDto);
 }

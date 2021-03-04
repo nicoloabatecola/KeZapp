@@ -1,5 +1,6 @@
 package it.sirfin.kezappserverhis.service.impl;
 
+import it.sirfin.kezappserverhis.dto.CancellaMessaggioDto;
 import it.sirfin.kezappserverhis.dto.InviaMessaggioDto;
 import it.sirfin.kezappserverhis.dto.RegistrazioneDto;
 import it.sirfin.kezappserverhis.dto.RichiediRegistrazioneDto;
@@ -34,7 +35,9 @@ public class KezappServiceImpl implements KezappService {
             //Da implemenare restituzione di messaggi che corrispondono solo
             //alla sessione
             return new RegistrazioneDto(chatRepository.findAll(), messaggioRepository.findAll(), chat.getSessione());
-        } else return new RegistrazioneDto();
+        } else {
+            return new RegistrazioneDto();
+        }
     }
 
     @Override
@@ -53,8 +56,17 @@ public class KezappServiceImpl implements KezappService {
         return aggiorna(inviaMessaggioDto.getSessione());
     }
 
+    
+    
     @Override
     public Messaggio allineaNickConSessione(List<Chat> contatti, InviaMessaggioDto inviaMessaggiDto) {
+        /*
+        cercare la chat per sessione ( è una sola oppure nessuna)
+        se non la trovate decidete cosa fare 
+        se la trovate prendete il nickname e mettetelo nel messaggio
+        */
+        
+        
         Messaggio m = new Messaggio();
         contatti.forEach(contatto -> {
             if (contatto.getSessione().equals(inviaMessaggiDto.getSessione())) {
@@ -63,6 +75,8 @@ public class KezappServiceImpl implements KezappService {
         });
         return m;
     }
+    
+    public String 
 
     @Override
     public RegistrazioneDto inviaUno(InviaMessaggioDto inviaMessaggioDto) {
@@ -81,7 +95,7 @@ public class KezappServiceImpl implements KezappService {
         System.out.println("*********************************************test***************");
         listaTest.forEach(x -> System.out.println(x));
         System.out.println("*********************************************test***************");
-        
+
         return aggiorna(inviaMessaggioDto.getSessione());
     }
 
@@ -94,6 +108,14 @@ public class KezappServiceImpl implements KezappService {
         messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(utenteInteressato, "tutti").forEach(a -> System.out.println(a));
 
         return regDto;
+    }
+
+    @Override
+    public List<Messaggio> cancellaMessaggio(CancellaMessaggioDto cancDto) {
+        messaggioRepository.delete(cancDto.getMessaggioDaCancellare());
+        
+        return messaggioRepository.findBy();
+
     }
 
     @Override

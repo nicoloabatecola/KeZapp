@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { CancellaMessaggioDto } from './cancella-messaggio-dto';
 import { Chat } from './chat';
 import { InviaMessaggioDto } from './invia-messaggio-dto';
 import { Messaggio } from './messaggio';
@@ -91,11 +92,14 @@ export class AppComponent {
     oss.subscribe();
   }
 
-  cancella(r: Messaggio) {
+  cancella(messaggio: Messaggio) {
 
-    let oss = this.http.post<Messaggio[]>("http://localhost:8080/cancellaMessaggio", r);
+    let cancellaMessaggioDto = new CancellaMessaggioDto();
+    cancellaMessaggioDto.messaggioDaCancellare = messaggio;
+    cancellaMessaggioDto.sessione = this.sessione;
+    let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/cancellaMessaggio", cancellaMessaggioDto);
     oss.subscribe(r => {
-      this.messaggi = r;
+      this.messaggi = r.messaggi;
     });
 
 

@@ -1,4 +1,4 @@
- package it.sirfin.kezappserverhis.controller;
+package it.sirfin.kezappserverhis.controller;
 
 import it.sirfin.kezappserverhis.dto.InviaMessaggioDto;
 import it.sirfin.kezappserverhis.dto.RegistrazioneDto;
@@ -37,7 +37,7 @@ public class KeZappController {
     @RequestMapping("/inviauno")
     @ResponseBody
     public RegistrazioneDto inviaUno(@RequestBody InviaMessaggioDto m) {
-        return  kezappservice.inviaUno(m);
+        return kezappservice.inviaUno(m);
     }
 
     @RequestMapping("/aggiorna")
@@ -45,11 +45,18 @@ public class KeZappController {
     public RegistrazioneDto aggiorna(@RequestBody RichiediMessaggiDto r) {
         return kezappservice.aggiorna(r.getSessione());
     }
-    
+
+    @RequestMapping("/cancellaMessaggio")
+    @ResponseBody
+    public List<Messaggio> cancellaMessaggio(@RequestBody Messaggio r) {
+        return kezappservice.cancellaMessaggio(r);
+    }
+
     //metodo svuota db, serve solo a resettare il db in maniera più rapida senza
     //dover usare il client DB
     @RequestMapping("/svuotaDB")
-    public void svuotaDB(){
+    public void svuotaDB() {
         kezappservice.svuotaDB();
     }
+
 }
