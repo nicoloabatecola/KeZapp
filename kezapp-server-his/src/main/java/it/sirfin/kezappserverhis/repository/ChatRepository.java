@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ChatRepository extends JpaRepository<Chat, Long>{
     List<Chat> findByNickname(String nn);
     Chat findByNicknameAndPassword(String n,String p);
+    Chat findBySessione(String s);
 }

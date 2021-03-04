@@ -61,16 +61,14 @@ public class KezappServiceImpl implements KezappService {
     @Override
     public String allineaNickConSessione(String sessione) {
 
-        List<Chat> contatti = chatRepository.findAll();
-        String nickname = "";
-
-        for (int i = 0; i < contatti.size(); i++) {
-            if (contatti.get(i).getSessione().equals(sessione)) {
-                nickname = contatti.get(i).getNickname();
-            }
-        }
-
-        return nickname;
+//        List<Chat> contatti = chatRepository.findAll();
+//        String nickname = "";
+//        for (int i = 0; i < contatti.size(); i++) {
+//            if (contatti.get(i).getSessione().equals(sessione)) {
+//                nickname = contatti.get(i).getNickname();
+//            }
+//        }
+        return chatRepository.findBySessione(sessione).getNickname();
     }
 
     @Override
