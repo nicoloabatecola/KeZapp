@@ -97,12 +97,11 @@ public class KezappServiceImpl implements KezappService {
 
     @Override
     public RegistrazioneDto aggiorna(String utenteInteressato) {
+        String nicknameUtenteInteressato = allineaNickConSessione(utenteInteressato);
         System.out.println("utente interessato: " + utenteInteressato);
         RegistrazioneDto regDto = new RegistrazioneDto();
         regDto.setContatti(chatRepository.findAll());
-        regDto.setMessaggi(messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(utenteInteressato, "tutti"));
-        messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(utenteInteressato, "tutti").forEach(a -> System.out.println(a));
-
+        regDto.setMessaggi(messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(nicknameUtenteInteressato, "tutti"));
         return regDto;
     }
 
