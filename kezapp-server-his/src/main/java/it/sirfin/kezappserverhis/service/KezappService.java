@@ -17,5 +17,5 @@ public interface KezappService {
     RegistrazioneDto aggiorna(String utenteInteressato);
     List<Messaggio> cancellaMessaggio(CancellaMessaggioDto cancDto);
     void svuotaDB();
-    Messaggio allineaNickConSessione(List<Chat> contatti,InviaMessaggioDto inviaMessaggiDto);
+    String allineaNickConSessione(String sessione);
 }

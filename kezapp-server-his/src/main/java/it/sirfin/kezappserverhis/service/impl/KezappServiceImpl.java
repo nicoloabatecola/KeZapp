@@ -46,7 +46,8 @@ public class KezappServiceImpl implements KezappService {
         //originariamente spedito da client e lo salva su DB
         Messaggio messaggio = new Messaggio();
         List<Chat> contatti = chatRepository.findAll();
-        messaggio = allineaNickConSessione(contatti, inviaMessaggioDto);
+        String sessione = allineaNickConSessione(inviaMessaggioDto.getSessione());
+        messaggio.setAliasMittente(sessione);
         messaggio.setAliasDestinatario(inviaMessaggioDto.getDestinatario());
         System.out.println(messaggio.getAliasMittente() + " MITTENTE");
         //messaggio.setAliasMittente(inviaMessaggioDto.getSessione());
@@ -56,27 +57,20 @@ public class KezappServiceImpl implements KezappService {
         return aggiorna(inviaMessaggioDto.getSessione());
     }
 
-    
-    
     @Override
-    public Messaggio allineaNickConSessione(List<Chat> contatti, InviaMessaggioDto inviaMessaggiDto) {
-        /*
-        cercare la chat per sessione ( è una sola oppure nessuna)
-        se non la trovate decidete cosa fare 
-        se la trovate prendete il nickname e mettetelo nel messaggio
-        */
+    public String allineaNickConSessione(String sessione) {
+
+        List<Chat> contatti = chatRepository.findAll();
+        String nickname="";
         
-        
-        Messaggio m = new Messaggio();
-        contatti.forEach(contatto -> {
-            if (contatto.getSessione().equals(inviaMessaggiDto.getSessione())) {
-                m.setAliasMittente(contatto.getNickname());
+        for(int i = 0; i<contatti.size() ; i++){
+            if(contatti.get(i).getSessione().equals(sessione)){
+                nickname = contatti.get(i).getNickname();
             }
-        });
-        return m;
+        }
+        
+        return nickname;
     }
-    
-    public String 
 
     @Override
     public RegistrazioneDto inviaUno(InviaMessaggioDto inviaMessaggioDto) {
@@ -85,7 +79,8 @@ public class KezappServiceImpl implements KezappService {
         System.out.println("*********************************************test***************");
         Messaggio messaggio = new Messaggio();
         List<Chat> contatti = chatRepository.findAll();
-        messaggio = allineaNickConSessione(contatti, inviaMessaggioDto);
+        String sessione = allineaNickConSessione(inviaMessaggioDto.getSessione());
+        messaggio.setAliasMittente(sessione);
         messaggio.setAliasDestinatario(inviaMessaggioDto.getDestinatario());
         //messaggio.setAliasMittente(inviaMessaggioDto.getSessione());
         messaggio.setTesto(inviaMessaggioDto.getMessaggio());
@@ -112,9 +107,11 @@ public class KezappServiceImpl implements KezappService {
 
     @Override
     public List<Messaggio> cancellaMessaggio(CancellaMessaggioDto cancDto) {
+
+        String nick = allineaNickConSessione(cancDto.getSessione());
         messaggioRepository.delete(cancDto.getMessaggioDaCancellare());
-        
-        return messaggioRepository.findBy();
+
+        return messaggioRepository.findAll();
 
     }
 
