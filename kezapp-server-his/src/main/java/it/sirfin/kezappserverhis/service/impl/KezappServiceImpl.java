@@ -61,14 +61,14 @@ public class KezappServiceImpl implements KezappService {
     public String allineaNickConSessione(String sessione) {
 
         List<Chat> contatti = chatRepository.findAll();
-        String nickname="";
-        
-        for(int i = 0; i<contatti.size() ; i++){
-            if(contatti.get(i).getSessione().equals(sessione)){
+        String nickname = "";
+
+        for (int i = 0; i < contatti.size(); i++) {
+            if (contatti.get(i).getSessione().equals(sessione)) {
                 nickname = contatti.get(i).getNickname();
             }
         }
-        
+
         return nickname;
     }
 
@@ -108,10 +108,10 @@ public class KezappServiceImpl implements KezappService {
     @Override
     public List<Messaggio> cancellaMessaggio(CancellaMessaggioDto cancDto) {
 
-        String nick = allineaNickConSessione(cancDto.getSessione());
+        String nickname = allineaNickConSessione(cancDto.getSessione());
         messaggioRepository.delete(cancDto.getMessaggioDaCancellare());
 
-        return messaggioRepository.findAll();
+        return messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(nickname, "tutti");
 
     }
 

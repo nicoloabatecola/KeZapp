@@ -97,9 +97,9 @@ export class AppComponent {
     let cancellaMessaggioDto = new CancellaMessaggioDto();
     cancellaMessaggioDto.messaggioDaCancellare = messaggio;
     cancellaMessaggioDto.sessione = this.sessione;
-    let oss = this.http.post<RegistrazioneDto>("http://localhost:8080/cancellaMessaggio", cancellaMessaggioDto);
+    let oss = this.http.post<Messaggio[]>("http://localhost:8080/cancellaMessaggio", cancellaMessaggioDto);
     oss.subscribe(r => {
-      this.messaggi = r.messaggi;
+      this.messaggi = r;
     });
 
 
