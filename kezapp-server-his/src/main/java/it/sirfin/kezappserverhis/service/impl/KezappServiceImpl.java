@@ -22,8 +22,6 @@ public class KezappServiceImpl implements KezappService {
 
     @Autowired
     MessaggioRepository messaggioRepository;
-    
-    
 
     @Override
     public RegistrazioneDto registrazione(RichiediRegistrazioneDto reqDto) {
@@ -84,7 +82,7 @@ public class KezappServiceImpl implements KezappService {
         List<Chat> contatti = chatRepository.findAll();
         String sessione = allineaNickConSessione(inviaMessaggioDto.getSessione());
         messaggio.setAliasMittente(sessione);
-        messaggio.setAliasDestinatario(inviaMessaggioDto.getDestinatario());
+        messaggio.setAliasDestinatario(allineaNickConSessione(inviaMessaggioDto.getDestinatario()));
         //messaggio.setAliasMittente(inviaMessaggioDto.getSessione());
         messaggio.setTesto(inviaMessaggioDto.getMessaggio());
         System.out.println(messaggio);
@@ -112,6 +110,7 @@ public class KezappServiceImpl implements KezappService {
     public List<Messaggio> cancellaMessaggio(CancellaMessaggioDto cancDto) {
 
         String nickname = allineaNickConSessione(cancDto.getSessione());
+        System.out.println("la sessione: " + cancDto.getSessione() + "corrisponde a nickname: " + nickname);
         messaggioRepository.delete(cancDto.getMessaggioDaCancellare());
 
         return messaggioRepository.findByAliasDestinatarioOrAliasDestinatario(nickname, "tutti");
@@ -126,7 +125,7 @@ public class KezappServiceImpl implements KezappService {
 
     @Override
     public String login(LoginDto logDto) {
-       return  chatRepository.findByNicknameAndPassword(logDto.getNickname(), logDto.getPassword()).getSessione();
+        return chatRepository.findByNicknameAndPassword(logDto.getNickname(), logDto.getPassword()).getSessione();
     }
 
 }
