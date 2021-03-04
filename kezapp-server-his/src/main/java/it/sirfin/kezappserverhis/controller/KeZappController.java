@@ -1,5 +1,6 @@
 package it.sirfin.kezappserverhis.controller;
 
+import it.sirfin.kezappserverhis.dto.CancellaMessaggioDto;
 import it.sirfin.kezappserverhis.dto.InviaMessaggioDto;
 import it.sirfin.kezappserverhis.dto.RegistrazioneDto;
 import it.sirfin.kezappserverhis.dto.RichiediMessaggiDto;
@@ -48,7 +49,7 @@ public class KeZappController {
 
     @RequestMapping("/cancellaMessaggio")
     @ResponseBody
-    public List<Messaggio> cancellaMessaggio(@RequestBody Messaggio r) {
+    public List<Messaggio> cancellaMessaggio(@RequestBody CancellaMessaggioDto r) {
         return kezappservice.cancellaMessaggio(r);
     }
 
