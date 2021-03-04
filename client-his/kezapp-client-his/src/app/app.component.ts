@@ -71,6 +71,7 @@ export class AppComponent {
       this.contatti = r.contatti;
       this.contatti = this.contatti.filter(c => c.sessione != this.sessione);
       this.messaggi = r.messaggi;
+      r.messaggi.forEach(m => console.log(m.aliasMittente));
     });
   }
 

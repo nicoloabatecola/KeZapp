@@ -43,12 +43,26 @@ public class KezappServiceImpl implements KezappService {
         //Crea un oggetto messaggio recuperando le informazioni da inviaMessaggioDto
         //originariamente spedito da client e lo salva su DB
         Messaggio messaggio = new Messaggio();
+        List<Chat> contatti = chatRepository.findAll();
+        messaggio = allineaNickConSessione(contatti, inviaMessaggioDto);
         messaggio.setAliasDestinatario(inviaMessaggioDto.getDestinatario());
-        messaggio.setAliasMittente(inviaMessaggioDto.getSessione());
+        System.out.println(messaggio.getAliasMittente() + " MITTENTE");
+        //messaggio.setAliasMittente(inviaMessaggioDto.getSessione());
         messaggio.setTesto(inviaMessaggioDto.getMessaggio());
         System.out.println(messaggio);
         messaggioRepository.save(messaggio);
         return aggiorna(inviaMessaggioDto.getSessione());
+    }
+
+    @Override
+    public Messaggio allineaNickConSessione(List<Chat> contatti, InviaMessaggioDto inviaMessaggiDto) {
+        Messaggio m = new Messaggio();
+        contatti.forEach(contatto -> {
+            if (contatto.getSessione().equals(inviaMessaggiDto.getSessione())) {
+                m.setAliasMittente(contatto.getNickname());
+            }
+        });
+        return m;
     }
 
     @Override
@@ -57,8 +71,10 @@ public class KezappServiceImpl implements KezappService {
         System.out.println(inviaMessaggioDto);
         System.out.println("*********************************************test***************");
         Messaggio messaggio = new Messaggio();
+        List<Chat> contatti = chatRepository.findAll();
+        messaggio = allineaNickConSessione(contatti, inviaMessaggioDto);
         messaggio.setAliasDestinatario(inviaMessaggioDto.getDestinatario());
-        messaggio.setAliasMittente(inviaMessaggioDto.getSessione());
+        //messaggio.setAliasMittente(inviaMessaggioDto.getSessione());
         messaggio.setTesto(inviaMessaggioDto.getMessaggio());
         System.out.println(messaggio);
         messaggioRepository.save(messaggio);
@@ -66,6 +82,7 @@ public class KezappServiceImpl implements KezappService {
         System.out.println("*********************************************test***************");
         listaTest.forEach(x -> System.out.println(x));
         System.out.println("*********************************************test***************");
+        
         return aggiorna(inviaMessaggioDto.getSessione());
     }
 
